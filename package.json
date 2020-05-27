@@ -11,6 +11,9 @@
     "fix": "eslint src/**/*.ts{,x} --fix"
   },
   "dependencies": {
+    "@react-native-firebase/app": "^7.1.0",
+    "@react-native-firebase/firestore": "^7.1.0",
+    "@react-native-firebase/storage": "^7.1.0",
     "react": "16.11.0",
     "react-native": "0.62.2"
   },
