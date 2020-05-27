@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1075899695284",
+    "firebase_url": "https://unikom-development.firebaseio.com",
+    "project_id": "unikom-development",
+    "storage_bucket": "unikom-development.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1075899695284:android:621042224bebf05f8057e1",
+        "android_client_info": {
+          "package_name": "com.unikom.zelenko"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1075899695284-a43bhu3uiqp15j6hg9c3gk8jghoba28b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-aXv-8vDij1DHWLOE00wF6BZvwNJ3QbA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1075899695284-a43bhu3uiqp15j6hg9c3gk8jghoba28b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

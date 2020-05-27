@@ -1,4 +1,4 @@
-package com.unikom;
+package com.unikom.zelenko;
 
 import com.facebook.react.ReactActivity;
 
