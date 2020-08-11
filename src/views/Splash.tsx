@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { ActivityIndicator, View } from 'react-native';
+import SplashScreen from 'react-native-splash-screen';
 
 import { NavigationProps } from 'modules/navigation';
 
@@ -10,6 +10,7 @@ export const Splash: React.FC<Props> = ({ navigation }) => {
   const finishedOnboarding = true;
 
   function onMount() {
+    SplashScreen.hide();
     if (finishedOnboarding) {
       navigation.replace('main');
       return;
@@ -19,9 +20,5 @@ export const Splash: React.FC<Props> = ({ navigation }) => {
 
   useEffect(onMount, [finishedOnboarding, navigation]);
 
-  return (
-    <View>
-      <ActivityIndicator />
-    </View>
-  );
+  return null;
 };
