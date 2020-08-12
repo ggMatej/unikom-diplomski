@@ -6,8 +6,6 @@
 
     <item
         android:drawable="@drawable/splash_icon"
-        android:height="200dp"
-        android:width="200dp"
         android:gravity="center"
         />
 
