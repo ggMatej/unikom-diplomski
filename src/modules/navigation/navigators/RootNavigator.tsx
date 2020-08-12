@@ -1,5 +1,8 @@
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import {
+  createStackNavigator,
+  TransitionPresets,
+} from '@react-navigation/stack';
 import React from 'react';
 
 import * as views from 'views';
@@ -16,8 +19,20 @@ export const RootNavigator: React.FC = () => {
         initialRouteName="splash"
       >
         <Stack.Screen name="splash" component={views.Splash} />
-        <Stack.Screen name="onboarding" component={views.Onboarding} />
-        <Stack.Screen name="main" component={MainNavigator} />
+        <Stack.Screen
+          options={{
+            ...TransitionPresets.SlideFromRightIOS,
+          }}
+          name="onboarding"
+          component={views.OnboardingScreen}
+        />
+        <Stack.Screen
+          options={{
+            ...TransitionPresets.ScaleFromCenterAndroid,
+          }}
+          name="main"
+          component={MainNavigator}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
