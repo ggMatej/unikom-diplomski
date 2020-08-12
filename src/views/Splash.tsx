@@ -10,12 +10,13 @@ export const Splash: React.FC<Props> = ({ navigation }) => {
   const finishedOnboarding = false;
 
   function onMount() {
-    SplashScreen.hide();
     if (finishedOnboarding) {
       navigation.replace('main');
+      SplashScreen.hide();
       return;
     }
     navigation.replace('onboarding');
+    SplashScreen.hide();
   }
 
   useEffect(onMount, [finishedOnboarding, navigation]);

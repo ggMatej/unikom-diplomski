@@ -1,8 +1,9 @@
 import React from 'react';
-import { Image, StatusBar } from 'react-native';
+import { Image, StatusBar, StyleSheet } from 'react-native';
 import Onboarding from 'react-native-onboarding-swiper';
 
 import { NavigationProps } from 'modules/navigation';
+import { Color } from 'global-styles';
 
 type Props = NavigationProps<'onboarding'>;
 
@@ -22,39 +23,61 @@ export const OnboardingScreen: React.FC<Props> = ({ navigation }) => {
       <Onboarding
         pages={[
           {
-            backgroundColor: '#fff',
+            backgroundColor: Color.Primary,
             title: 'Uslikaj',
             subtitle: 'Uslikajte ili odaberite postojeću fotografiju',
             image: (
-              <Image source={require('assets/images/onboarding-camera.png')} />
+              <Image
+                style={styles.image}
+                source={require('assets/images/onboarding-camera.png')}
+              />
             ),
           },
           {
-            backgroundColor: '#fff',
+            backgroundColor: Color.Primary,
             title: 'Opiši',
             subtitle: 'Napišite detaljan opis situacije',
             image: (
               <Image
+                style={styles.image}
                 source={require('assets/images/onboarding-description.png')}
               />
             ),
           },
           {
-            backgroundColor: '#fff',
+            backgroundColor: Color.Primary,
             title: 'Pošalji',
             subtitle: 'Pošaljite prijavu na razmatranje',
             image: (
-              <Image source={require('assets/images/onboarding-upload.png')} />
+              <Image
+                style={styles.image}
+                source={require('assets/images/onboarding-upload.png')}
+              />
             ),
           },
         ]}
         nextLabel="Dalje"
         skipLabel="Preskoči"
         bottomBarHighlight={false}
-        bottomBarHeight={100}
+        bottomBarHeight={70}
         onSkip={handleOnSkip}
         onDone={handleOnDone}
+        titleStyles={styles.title}
+        subTitleStyles={styles.subtitle}
       />
     </>
   );
 };
+
+const styles = StyleSheet.create({
+  image: {
+    tintColor: Color.TextWhite,
+  },
+  title: {
+    color: Color.TextWhite,
+    fontWeight: 'bold',
+  },
+  subtitle: {
+    color: Color.TextWhite,
+  },
+});
