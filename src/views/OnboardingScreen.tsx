@@ -19,7 +19,7 @@ export const OnboardingScreen: React.FC<Props> = ({ navigation }) => {
 
   return (
     <>
-      <StatusBar translucent backgroundColor="transparent" />
+      <StatusBar backgroundColor={Color.Primary} />
       <Onboarding
         pages={[
           {

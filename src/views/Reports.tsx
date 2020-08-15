@@ -4,12 +4,12 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Color } from 'global-styles';
 
-export const Home: React.FC = ({}) => {
+export const Reports: React.FC = ({}) => {
   return (
     <SafeAreaView>
-      <StatusBar backgroundColor={Color.Text} />
+      <StatusBar backgroundColor={Color.Primary} />
       <View>
-        <Text>Home screen</Text>
+        <Text>Reports screen</Text>
       </View>
     </SafeAreaView>
   );
