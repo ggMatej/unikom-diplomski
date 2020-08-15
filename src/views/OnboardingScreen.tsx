@@ -19,11 +19,11 @@ export const OnboardingScreen: React.FC<Props> = ({ navigation }) => {
 
   return (
     <>
-      <StatusBar backgroundColor={Color.Primary} />
+      <StatusBar backgroundColor={Color.Background} />
       <Onboarding
         pages={[
           {
-            backgroundColor: Color.Primary,
+            backgroundColor: Color.Background,
             title: 'Uslikaj',
             subtitle: 'Uslikajte ili odaberite postojeću fotografiju',
             image: (
@@ -34,7 +34,7 @@ export const OnboardingScreen: React.FC<Props> = ({ navigation }) => {
             ),
           },
           {
-            backgroundColor: Color.Primary,
+            backgroundColor: Color.Background,
             title: 'Opiši',
             subtitle: 'Napišite detaljan opis situacije',
             image: (
@@ -45,7 +45,7 @@ export const OnboardingScreen: React.FC<Props> = ({ navigation }) => {
             ),
           },
           {
-            backgroundColor: Color.Primary,
+            backgroundColor: Color.Background,
             title: 'Pošalji',
             subtitle: 'Pošaljite prijavu na razmatranje',
             image: (
@@ -71,13 +71,16 @@ export const OnboardingScreen: React.FC<Props> = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   image: {
-    tintColor: Color.TextWhite,
+    tintColor: Color.Primary,
   },
   title: {
-    color: Color.TextWhite,
+    color: Color.Primary,
     fontWeight: 'bold',
   },
   subtitle: {
-    color: Color.TextWhite,
+    color: Color.Primary,
+  },
+  onboarding: {
+    color: Color.Primary,
   },
 });
