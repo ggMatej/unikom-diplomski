@@ -16,10 +16,30 @@ export const TopTabNavigator: React.FC = () => {
         style: {
           backgroundColor: Color.Background,
         },
+
+        activeTintColor: Color.Secondary,
+        indicatorStyle: {
+          backgroundColor: Color.Secondary,
+        },
+        labelStyle: {
+          fontWeight: 'bold',
+        },
       }}
     >
-      <Tab.Screen name="home" component={views.Home} />
-      <Tab.Screen name="reports" component={views.Reports} />
+      <Tab.Screen
+        options={{
+          title: 'NOVA PRIJAVA',
+        }}
+        name="home"
+        component={views.Home}
+      />
+      <Tab.Screen
+        options={{
+          title: 'MOJE PRIJAVE',
+        }}
+        name="reports"
+        component={views.Reports}
+      />
     </Tab.Navigator>
   );
 };
