@@ -1,5 +1,5 @@
 import React from 'react';
-import { StatusBar, StyleSheet, View, Dimensions } from 'react-native';
+import { StatusBar, Dimensions, View, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Color } from 'global-styles';
@@ -7,10 +7,10 @@ import { Color } from 'global-styles';
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
 
-export const Home: React.FC = ({}) => {
+export const Reports: React.FC = ({}) => {
   return (
     <SafeAreaView>
-      <StatusBar backgroundColor={Color.Text} />
+      <StatusBar backgroundColor={Color.Primary} />
       <View style={styles.mainContainer}>
         <View style={styles.topContainerBack}>
           <View style={styles.topContainerFront} />
@@ -29,13 +29,13 @@ const styles = StyleSheet.create({
     backgroundColor: Color.Secondary,
   },
   topContainerBack: {
-    flex: 7,
+    flex: 1,
     backgroundColor: Color.Primary,
   },
   topContainerFront: {
     height: '100%',
     backgroundColor: Color.Background,
-    borderBottomRightRadius: 55,
+    borderBottomRightRadius: 150,
   },
   bottomContainerBack: {
     flex: 1,
@@ -44,5 +44,6 @@ const styles = StyleSheet.create({
   bottomContainerFront: {
     height: '100%',
     backgroundColor: Color.Primary,
+    borderTopLeftRadius: 150,
   },
 });

@@ -1,16 +1,42 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
 
-import * as views from 'views';
+import { Color } from 'global-styles';
+import { HeaderLogo } from 'components/HeaderLogo';
+import { HeaderInfoIcon } from 'components/HeaderInfoIcon';
 
-import { NavigationParamList } from '..';
+import { TopTabNavigator } from './TopTabNavigator';
 
-export const MainNavigator: React.FC = () => {
+import { NavigationParamList, NavigationProps } from '..';
+
+type Props = NavigationProps<'main'>;
+
+export const MainNavigator: React.FC<Props> = ({ navigation, route }) => {
   const Stack = createStackNavigator<NavigationParamList>();
 
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="home" component={views.Home} />
+    <Stack.Navigator
+      screenOptions={{
+        title: 'UNIKOM',
+        headerStyle: {
+          backgroundColor: Color.Background,
+          elevation: 0,
+        },
+        headerTintColor: Color.TextWhite,
+        headerTitleStyle: {
+          color: Color.Secondary,
+          fontWeight: 'bold',
+          letterSpacing: 2,
+        },
+        // eslint-disable-next-line react/display-name
+        headerTitle: () => <HeaderLogo />,
+        // eslint-disable-next-line react/display-name
+        headerRight: () => (
+          <HeaderInfoIcon navigation={navigation} route={route} />
+        ),
+      }}
+    >
+      <Stack.Screen name="tab" component={TopTabNavigator} />
     </Stack.Navigator>
   );
 };

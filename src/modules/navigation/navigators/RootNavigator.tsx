@@ -28,7 +28,7 @@ export const RootNavigator: React.FC = () => {
         />
         <Stack.Screen
           options={{
-            ...TransitionPresets.ScaleFromCenterAndroid,
+            ...TransitionPresets.SlideFromRightIOS,
           }}
           name="main"
           component={MainNavigator}

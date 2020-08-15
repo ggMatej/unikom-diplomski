@@ -3,4 +3,6 @@ export type NavigationParamList = {
   onboarding: undefined;
   home: undefined;
   main: undefined;
+  tab: undefined;
+  reports: undefined;
 };
