@@ -4,10 +4,12 @@ import React from 'react';
 import { Color } from 'global-styles';
 import { HeaderLogo } from 'components/HeaderLogo';
 import { HeaderInfoIcon } from 'components/HeaderInfoIcon';
+import {
+  NavigationParamList,
+  NavigationProps,
+} from 'modules/navigation/models';
 
 import { TopTabNavigator } from './TopTabNavigator';
-
-import { NavigationParamList, NavigationProps } from '..';
 
 type Props = NavigationProps<'main'>;
 
