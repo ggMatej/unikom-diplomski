@@ -6,8 +6,9 @@ import {
 import React from 'react';
 
 import * as views from 'views';
+import { NavigationParamList } from 'modules/navigation/models';
 
-import { MainNavigator, NavigationParamList } from '..';
+import { MainNavigator } from './MainNavigator';
 
 export const RootNavigator: React.FC = () => {
   const Stack = createStackNavigator<NavigationParamList>();
