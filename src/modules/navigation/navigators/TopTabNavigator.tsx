@@ -3,8 +3,7 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 
 import * as views from 'views';
 import { Color } from 'global-styles';
-
-import { NavigationParamList } from '..';
+import { NavigationParamList } from 'modules/navigation/models';
 
 export const TopTabNavigator: React.FC = () => {
   const Tab = createMaterialTopTabNavigator<NavigationParamList>();
