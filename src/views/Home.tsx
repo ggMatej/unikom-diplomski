@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import LinearGradient from 'react-native-linear-gradient';
 
 import { Color } from 'global-styles';
-import { CustomButton } from 'components';
+import { ActionButton, LinearGradientButton } from 'components';
 import { BottomSheetModal } from 'components/BottomSheetModal';
 
 export const Home: React.FC = () => {
@@ -22,10 +22,25 @@ export const Home: React.FC = () => {
 
   function imageUploadModalContent() {
     return (
-      <View style={styles.imageUploadModalContent}>
-        <Text>WASAP</Text>
-        <Text>SUCK MY PENIS</Text>
-        <Text>YOU FUCK</Text>
+      <View style={styles.imageUploadModalContainer}>
+        <View style={styles.modalHandle} />
+        <View style={styles.imageUploadModalContent}>
+          <LinearGradientButton
+            placeholder={'otvori kameru'}
+            onPress={toggleImageUploadModal}
+            type={'primary'}
+          />
+          <LinearGradientButton
+            placeholder={'izaberi iz galerije'}
+            onPress={toggleImageUploadModal}
+            type={'primary'}
+          />
+          <LinearGradientButton
+            placeholder={'odustani'}
+            onPress={toggleImageUploadModal}
+            type={'cancel'}
+          />
+        </View>
       </View>
     );
   }
@@ -47,19 +62,19 @@ export const Home: React.FC = () => {
         >
           <View style={styles.topContainerFront}>
             <View style={styles.contentContainer}>
-              <CustomButton
+              <ActionButton
                 buttonText={'dodaj fotografiju'}
                 onPress={toggleImageUploadModal}
                 buttonIcon={'camera'}
                 isDisabled={isImageUploadModalVisible}
               />
-              <CustomButton
+              <ActionButton
                 buttonText={'dodaj opis'}
                 onPress={onPress}
                 buttonIcon={'gallery'}
                 isDisabled={true}
               />
-              <CustomButton
+              <ActionButton
                 buttonText={'dodaj lokaciju'}
                 onPress={onPress}
                 buttonIcon={'location'}
@@ -113,17 +128,35 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'center',
   },
-  imageUploadModalContent: {
-    backgroundColor: Color.Background,
-    justifyContent: 'center',
+  imageUploadModalContainer: {
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    height: '40%',
     alignItems: 'center',
-    height: '70%',
-    padding: 10,
+    paddingTop: 20,
+    paddingBottom: 20,
+    backgroundColor: Color.Background,
+    borderTopWidth: 0.3,
+    borderTopColor: Color.Text,
     borderTopLeftRadius: 35,
     borderTopRightRadius: 35,
     borderLeftColor: Color.Primary,
     borderRightColor: Color.Secondary,
-    borderRightWidth: 3,
-    borderLeftWidth: 3,
+    borderRightWidth: 4,
+    borderLeftWidth: 4,
+  },
+  imageUploadModalContent: {
+    justifyContent: 'center',
+    backgroundColor: Color.Background,
+    width: '70%',
+    height: '80%',
+  },
+  modalHandle: {
+    backgroundColor: Color.Text,
+    opacity: 0.3,
+    height: 5,
+    width: '20%',
+    marginTop: '2%',
+    borderRadius: 50,
   },
 });
