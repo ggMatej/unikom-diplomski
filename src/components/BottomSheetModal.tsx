@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity, Image, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import Modal from 'react-native-modal';
 
 import { Color } from 'global-styles';
@@ -19,12 +19,15 @@ export const BottomSheetModal: React.FC<Props> = ({
 }) => {
   return (
     <Modal
-      backdropColor={Color.Background}
-      backdropOpacity={0.5}
+      backdropColor={Color.Text}
+      backdropOpacity={0.55}
       isVisible={isVisible}
       onSwipeComplete={swipeCallBack}
       swipeDirection={['down']}
       style={styles.view}
+      animationOutTiming={700}
+      useNativeDriverForBackdrop={true}
+      onBackdropPress={swipeCallBack}
     >
       {content}
     </Modal>

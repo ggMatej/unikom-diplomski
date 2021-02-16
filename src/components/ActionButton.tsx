@@ -13,7 +13,7 @@ interface OwnProps {
 
 type Props = OwnProps;
 
-export const CustomButton: React.FC<Props> = ({
+export const ActionButton: React.FC<Props> = ({
   onPress,
   buttonIcon,
   buttonText,
@@ -82,5 +82,5 @@ const styles = StyleSheet.create({
   },
   disabled: {
     opacity: 0.5,
-  }
+  },
 });

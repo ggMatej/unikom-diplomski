@@ -13,7 +13,6 @@ export const OnboardingScreen: React.FC<Props> = ({ navigation }) => {
   }
 
   function handleOnDone() {
-    // Todo - finished onboarding
     navigation.replace('main');
   }
 
