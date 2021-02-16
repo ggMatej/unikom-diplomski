@@ -35,7 +35,7 @@ export const LinearGradientButton: React.FC<Props> = ({
       useAngle={true}
       angle={90}
     >
-      <TouchableOpacity onPress={onPress}>
+      <TouchableOpacity style={styles.touchableOpacity} onPress={onPress}>
         <Text style={[styles.text]}>{placeholder}</Text>
       </TouchableOpacity>
     </LinearGradient>
@@ -50,6 +50,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 15,
     borderRadius: 50,
+  },
+  touchableOpacity: {
+    width: '100%',
+    height: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   text: {
     textTransform: 'uppercase',
