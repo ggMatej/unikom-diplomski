@@ -25,7 +25,7 @@ export const BottomSheetModal: React.FC<Props> = ({
       onSwipeComplete={swipeCallBack}
       swipeDirection={['down']}
       style={styles.view}
-      animationOutTiming={1000}
+      animationOutTiming={700}
       useNativeDriverForBackdrop={true}
       onBackdropPress={swipeCallBack}
     >
