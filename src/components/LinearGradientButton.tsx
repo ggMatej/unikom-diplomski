@@ -1,7 +1,6 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity, Text } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import { withSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Color } from 'global-styles';
 
