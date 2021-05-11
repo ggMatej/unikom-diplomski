@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { StatusBar, StyleSheet, View, Text } from 'react-native';
+import { StatusBar, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import LinearGradient from 'react-native-linear-gradient';
+import ImagePicker from 'react-native-image-crop-picker';
 
 import { Color } from 'global-styles';
 import { ActionButton, LinearGradientButton } from 'components';
@@ -20,6 +21,14 @@ export const Home: React.FC = () => {
     setIsImageUploadModalVisible(!isImageUploadModalVisible);
   }
 
+  function openPicker() {
+    ImagePicker.openPicker({
+      mediaType: 'photo',
+      width: 300,
+      height: 400,
+    }).then((image) => console.log(image));
+  }
+
   function imageUploadModalContent() {
     return (
       <View style={styles.imageUploadModalContainer}>
@@ -27,7 +36,7 @@ export const Home: React.FC = () => {
         <View style={styles.imageUploadModalContent}>
           <LinearGradientButton
             placeholder={'otvori kameru'}
-            onPress={toggleImageUploadModal}
+            onPress={openPicker}
             type={'primary'}
           />
           <LinearGradientButton
