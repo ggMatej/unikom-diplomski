@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StatusBar, StyleSheet, View, Text } from 'react-native';
+import { StatusBar, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import LinearGradient from 'react-native-linear-gradient';
 
@@ -20,6 +20,10 @@ export const Home: React.FC = () => {
     setIsImageUploadModalVisible(!isImageUploadModalVisible);
   }
 
+  function openPicker() {
+    console.log('OPEN PICKER');
+  }
+
   function imageUploadModalContent() {
     return (
       <View style={styles.imageUploadModalContainer}>
@@ -27,7 +31,7 @@ export const Home: React.FC = () => {
         <View style={styles.imageUploadModalContent}>
           <LinearGradientButton
             placeholder={'otvori kameru'}
-            onPress={toggleImageUploadModal}
+            onPress={openPicker}
             type={'primary'}
           />
           <LinearGradientButton
