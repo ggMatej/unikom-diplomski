@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { StatusBar, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import LinearGradient from 'react-native-linear-gradient';
-import ImagePicker from 'react-native-image-crop-picker';
 
 import { Color } from 'global-styles';
 import { ActionButton, LinearGradientButton } from 'components';
@@ -22,11 +21,7 @@ export const Home: React.FC = () => {
   }
 
   function openPicker() {
-    ImagePicker.openPicker({
-      mediaType: 'photo',
-      width: 300,
-      height: 400,
-    }).then((image) => console.log(image));
+    console.log('OPEN PICKER');
   }
 
   function imageUploadModalContent() {
