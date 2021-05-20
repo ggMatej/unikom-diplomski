@@ -5422,6 +5422,11 @@ react-native-onboarding-swiper@^1.1.4:
   dependencies:
     tinycolor2 "^1.4.1"
 
+react-native-permissions@^3.0.3:
+  version "3.0.3"
+  resolved "https://nexus.emilfreydigital.hr/repository/npm-group/react-native-permissions/-/react-native-permissions-3.0.3.tgz#aa90649728a9720b0de9cfcfdb447b35a6630de0"
+  integrity sha512-8xiEnU29qHZcT05XXwhPHiLChTt82Pn5Z/nFdDOYGNFZ+IYSbYeGmIxFpratCRO6dgLptNaDFDPiyw2X7UZTeg==
+
 react-native-reanimated@^1.13.2:
   version "1.13.2"
   resolved "https://registry.yarnpkg.com/react-native-reanimated/-/react-native-reanimated-1.13.2.tgz#1ae5457b24b4913d173a5a064bb28eae7783d293"

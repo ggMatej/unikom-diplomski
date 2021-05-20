@@ -1,7 +1,15 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StatusBar, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import LinearGradient from 'react-native-linear-gradient';
+import {
+  checkMultiple,
+  PERMISSIONS,
+  request,
+  PermissionStatus,
+  requestMultiple,
+  check,
+} from 'react-native-permissions';
 
 import { Color } from 'global-styles';
 import { ActionButton, LinearGradientButton } from 'components';
@@ -11,6 +19,99 @@ export const Home: React.FC = () => {
   const [isImageUploadModalVisible, setIsImageUploadModalVisible] = useState(
     false,
   );
+
+  function handleLocationPermissionRequest(response: PermissionStatus) {
+    switch (response) {
+      case 'denied':
+        // TODO - Show custom modal -> Ask user for permission again
+        console.log('DENIED');
+        break;
+
+      case 'granted':
+        break;
+
+      case 'blocked':
+        // TODO - Show custom modal -> Open phone settings
+        break;
+    }
+  }
+
+  function handleLocationPermissionStatus(permissionStatus: PermissionStatus) {
+    switch (permissionStatus) {
+      case 'unavailable' || 'limited':
+        // TODO - Show custom modal -> "User can't use this app"
+        break;
+
+      case 'denied':
+        request(PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION).then((result) => {
+          handleLocationPermissionRequest(result);
+        });
+        break;
+
+      case 'granted':
+        break;
+
+      case 'blocked':
+        // TODO - Show custom modal -> Open phone settings
+        break;
+    }
+  }
+
+  function handleCameraPermissionRequest(response: PermissionStatus) {
+    switch (response) {
+      case 'denied':
+        // TODO - Show custom modal -> Ask user for permission again
+        console.log('DENIED');
+        break;
+
+      case 'granted':
+        check(PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION).then(
+          (locationPermission) => {
+            handleLocationPermissionStatus(locationPermission);
+          },
+        );
+        break;
+
+      case 'blocked':
+        // TODO - Show custom modal -> Open phone settings
+        break;
+    }
+  }
+
+  function handleCameraPermissionStatus(permissionStatus: PermissionStatus) {
+    switch (permissionStatus) {
+      case 'unavailable' || 'limited':
+        // TODO - Show custom modal that user can't use this app
+        console.log(
+          'This feature is not available (on this device / in this context)',
+        );
+        break;
+
+      case 'denied':
+        request(PERMISSIONS.ANDROID.CAMERA).then((result) => {
+          handleCameraPermissionRequest(result);
+        });
+        break;
+
+      case 'granted':
+        check(PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION).then(
+          (locationPermission) => {
+            handleLocationPermissionStatus(locationPermission);
+          },
+        );
+        break;
+
+      case 'blocked':
+        // TODO - Custom modal -> Open phone settings
+        break;
+    }
+  }
+
+  function handlePermissions() {
+    check(PERMISSIONS.ANDROID.CAMERA).then((cameraPermission) => {
+      handleCameraPermissionStatus(cameraPermission);
+    });
+  }
 
   function onPress() {
     console.log('wtf');
@@ -48,6 +149,10 @@ export const Home: React.FC = () => {
       </View>
     );
   }
+
+  useEffect(() => {
+    handlePermissions();
+  }, []);
 
   return (
     <SafeAreaView>
