@@ -22,7 +22,7 @@ export const InfoModal: React.FC<Props> = ({
   return (
     <Modal
       backdropColor={Color.Text}
-      backdropOpacity={0.55}
+      backdropOpacity={0.5}
       isVisible={isVisible}
       onSwipeComplete={infoModalCallback}
       swipeDirection={['down', 'left', 'right', 'up']}
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
   },
   message: {
     marginTop: 10,
-    marginBottom: 10,
+    marginBottom: 20,
     fontSize: 16,
   },
   view: {
@@ -67,7 +67,6 @@ const styles = StyleSheet.create({
   },
   button: {
     alignSelf: 'center',
-
     width: '100%',
     height: 40,
     justifyContent: 'center',

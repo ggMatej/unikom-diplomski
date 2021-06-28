@@ -1,1 +1,1 @@
-export * from './useCameraPermission';
+export * from './usePermissionRequest';
