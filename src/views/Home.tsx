@@ -1,158 +1,99 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { StatusBar, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import LinearGradient from 'react-native-linear-gradient';
-import {
-  checkMultiple,
-  PERMISSIONS,
-  request,
-  PermissionStatus,
-  requestMultiple,
-  check,
-} from 'react-native-permissions';
+import { PERMISSIONS, check, openSettings } from 'react-native-permissions';
 
 import { Color } from 'global-styles';
-import { ActionButton, LinearGradientButton } from 'components';
+import { ActionButton, InfoModal } from 'components';
 import { BottomSheetModal } from 'components/BottomSheetModal';
+import { usePermissionRequest } from 'hooks';
 
 export const Home: React.FC = () => {
+  const [
+    isCameraPermissionModalVisible,
+    setIsCameraPermissionModalVisible,
+  ] = useState(false);
+
+  const [
+    isLocationPermissionModalVisible,
+    setIsLocationPermissionModalVisible,
+  ] = useState(false);
+
+  const [isSettingsModalVisible, setIsSettingsModalVisible] = useState(false);
+
   const [isImageUploadModalVisible, setIsImageUploadModalVisible] = useState(
     false,
   );
 
-  function handleLocationPermissionRequest(response: PermissionStatus) {
-    switch (response) {
-      case 'denied':
-        // TODO - Show custom modal -> Ask user for permission again
-        console.log('DENIED');
-        break;
-
-      case 'granted':
-        break;
-
-      case 'blocked':
-        // TODO - Show custom modal -> Open phone settings
-        break;
-    }
+  function toggleCameraPermissionModal() {
+    setIsCameraPermissionModalVisible(!isCameraPermissionModalVisible);
   }
 
-  function handleLocationPermissionStatus(permissionStatus: PermissionStatus) {
-    switch (permissionStatus) {
-      case 'unavailable' || 'limited':
-        // TODO - Show custom modal -> "User can't use this app"
-        break;
-
-      case 'denied':
-        request(PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION).then((result) => {
-          handleLocationPermissionRequest(result);
-        });
-        break;
-
-      case 'granted':
-        break;
-
-      case 'blocked':
-        // TODO - Show custom modal -> Open phone settings
-        break;
-    }
+  function toggleLocationPermissionModal() {
+    setIsLocationPermissionModalVisible(!isLocationPermissionModalVisible);
   }
 
-  function handleCameraPermissionRequest(response: PermissionStatus) {
-    switch (response) {
-      case 'denied':
-        // TODO - Show custom modal -> Ask user for permission again
-        console.log('DENIED');
-        break;
-
-      case 'granted':
-        check(PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION).then(
-          (locationPermission) => {
-            handleLocationPermissionStatus(locationPermission);
-          },
-        );
-        break;
-
-      case 'blocked':
-        // TODO - Show custom modal -> Open phone settings
-        break;
-    }
-  }
-
-  function handleCameraPermissionStatus(permissionStatus: PermissionStatus) {
-    switch (permissionStatus) {
-      case 'unavailable' || 'limited':
-        // TODO - Show custom modal that user can't use this app
-        console.log(
-          'This feature is not available (on this device / in this context)',
-        );
-        break;
-
-      case 'denied':
-        request(PERMISSIONS.ANDROID.CAMERA).then((result) => {
-          handleCameraPermissionRequest(result);
-        });
-        break;
-
-      case 'granted':
-        check(PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION).then(
-          (locationPermission) => {
-            handleLocationPermissionStatus(locationPermission);
-          },
-        );
-        break;
-
-      case 'blocked':
-        // TODO - Custom modal -> Open phone settings
-        break;
-    }
-  }
-
-  function handlePermissions() {
-    check(PERMISSIONS.ANDROID.CAMERA).then((cameraPermission) => {
-      handleCameraPermissionStatus(cameraPermission);
-    });
-  }
-
-  function onPress() {
-    console.log('wtf');
+  function toggleSettingsModal() {
+    setIsSettingsModalVisible(!isSettingsModalVisible);
   }
 
   function toggleImageUploadModal() {
     setIsImageUploadModalVisible(!isImageUploadModalVisible);
   }
 
-  function openPicker() {
-    console.log('OPEN PICKER');
+  const requestCameraPermission = usePermissionRequest(
+    'android.permission.CAMERA',
+    toggleImageUploadModal,
+    toggleCameraPermissionModal,
+    toggleSettingsModal,
+  );
+
+  const requestLocationPermission = usePermissionRequest(
+    'android.permission.ACCESS_FINE_LOCATION',
+    toggleImageUploadModal,
+    toggleLocationPermissionModal,
+    toggleSettingsModal,
+  );
+
+  function onPress() {
+    console.log('wtf');
   }
 
-  function imageUploadModalContent() {
-    return (
-      <View style={styles.imageUploadModalContainer}>
-        <View style={styles.modalHandle} />
-        <View style={styles.imageUploadModalContent}>
-          <LinearGradientButton
-            placeholder={'otvori kameru'}
-            onPress={openPicker}
-            type={'primary'}
-          />
-          <LinearGradientButton
-            placeholder={'izaberi iz galerije'}
-            onPress={toggleImageUploadModal}
-            type={'primary'}
-          />
-          <LinearGradientButton
-            placeholder={'odustani'}
-            onPress={toggleImageUploadModal}
-            type={'cancel'}
-          />
-        </View>
-      </View>
-    );
+  function onAddPhoto() {
+    check(PERMISSIONS.ANDROID.CAMERA).then((cameraPermission) => {
+      if (cameraPermission === 'granted') {
+        toggleImageUploadModal();
+        return;
+      }
+      requestCameraPermission();
+    });
   }
 
-  useEffect(() => {
-    handlePermissions();
-  }, []);
+  function openAppSettings() {
+    toggleSettingsModal();
+    setTimeout(() => {
+      openSettings();
+    }, 500);
+  }
+
+  function onCameraPermissionModalClosed() {
+    toggleCameraPermissionModal();
+    requestCameraPermission();
+  }
+
+  function onLocationPermissionModalClosed() {
+    toggleCameraPermissionModal();
+    requestLocationPermission();
+  }
+
+  function openAppGallery() {
+    return;
+  }
+
+  function openAppCamera() {
+    return;
+  }
 
   return (
     <SafeAreaView>
@@ -160,9 +101,36 @@ export const Home: React.FC = () => {
       <View style={styles.mainContainer}>
         <BottomSheetModal
           isVisible={isImageUploadModalVisible}
-          swipeCallBack={toggleImageUploadModal}
-          content={imageUploadModalContent()}
+          onCancel={toggleImageUploadModal}
+          onOpenGallery={openAppGallery}
+          onOpenCamera={openAppCamera}
         />
+
+        <InfoModal
+          title={'Info'}
+          message={
+            'Za korištenje aplikacije potrebno je dopuštenje za korištenje kamere.'
+          }
+          isVisible={isCameraPermissionModalVisible}
+          infoModalCallback={onCameraPermissionModalClosed}
+        />
+
+        <InfoModal
+          title={'Info'}
+          message={`Korištenje kamere je blokirano.\nOmogučite korištenje kamere u postavkama.`}
+          isVisible={isSettingsModalVisible}
+          infoModalCallback={openAppSettings}
+        />
+
+        <InfoModal
+          title={'Info'}
+          message={
+            'Za korištenje aplikacije potrebno je dopuštenje za korištenje lokacije.'
+          }
+          isVisible={isLocationPermissionModalVisible}
+          infoModalCallback={onLocationPermissionModalClosed}
+        />
+
         <LinearGradient
           colors={[Color.Primary, Color.Secondary]}
           useAngle={true}
@@ -173,7 +141,7 @@ export const Home: React.FC = () => {
             <View style={styles.contentContainer}>
               <ActionButton
                 buttonText={'dodaj fotografiju'}
-                onPress={toggleImageUploadModal}
+                onPress={onAddPhoto}
                 buttonIcon={'camera'}
                 isDisabled={isImageUploadModalVisible}
               />
@@ -236,36 +204,5 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 55,
     justifyContent: 'space-around',
     alignItems: 'center',
-  },
-  imageUploadModalContainer: {
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    height: '40%',
-    alignItems: 'center',
-    paddingTop: 20,
-    paddingBottom: 20,
-    backgroundColor: Color.Background,
-    borderTopWidth: 0.3,
-    borderTopColor: Color.Text,
-    borderTopLeftRadius: 35,
-    borderTopRightRadius: 35,
-    borderLeftColor: Color.Primary,
-    borderRightColor: Color.Secondary,
-    borderRightWidth: 4,
-    borderLeftWidth: 4,
-  },
-  imageUploadModalContent: {
-    justifyContent: 'center',
-    backgroundColor: Color.Background,
-    width: '70%',
-    height: '80%',
-  },
-  modalHandle: {
-    backgroundColor: Color.Text,
-    opacity: 0.3,
-    height: 5,
-    width: '20%',
-    marginTop: '2%',
-    borderRadius: 50,
   },
 });

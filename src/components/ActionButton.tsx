@@ -8,7 +8,7 @@ interface OwnProps {
   onPress: () => void;
   buttonIcon: 'camera' | 'gallery' | 'location';
   buttonText: string;
-  isDisabled: boolean;
+  isDisabled?: boolean;
 }
 
 type Props = OwnProps;
@@ -41,7 +41,7 @@ export const ActionButton: React.FC<Props> = ({
         style={styles.gradient}
       >
         <TouchableOpacity
-          disabled={isDisabled}
+          disabled={isDisabled ? isDisabled : false}
           onPress={onPress}
           style={styles.touchableOpacity}
         >
