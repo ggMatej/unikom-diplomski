@@ -1,13 +1,9 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
-
 import { Color } from 'global-styles';
-import { HeaderLogo } from 'components/HeaderLogo';
-import { HeaderInfoIcon } from 'components/HeaderInfoIcon';
-import {
-  NavigationParamList,
-  NavigationProps,
-} from 'modules/navigation/models';
+
+import { NavigationParamList, NavigationProps } from 'modules/navigation';
+import { HeaderInfoIcon, HeaderLogo } from 'modules/shared';
 
 import { TopTabNavigator } from './TopTabNavigator';
 

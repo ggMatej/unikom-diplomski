@@ -1,7 +1,6 @@
 import React from 'react';
 import { TouchableOpacity, Image, StyleSheet, Text, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-
 import { Color } from 'global-styles';
 
 interface OwnProps {
@@ -22,13 +21,13 @@ export const ActionButton: React.FC<Props> = ({
   function getIcon() {
     switch (buttonIcon) {
       case 'camera': {
-        return require('../assets/images/camera.png');
+        return require('../../../assets/images/camera.png');
       }
       case 'gallery': {
-        return require('../assets/images/text.png');
+        return require('../../../assets/images/text.png');
       }
       case 'location': {
-        return require('../assets/images/location.png');
+        return require('../../../assets/images/location.png');
       }
     }
   }

@@ -1,9 +1,9 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import Modal from 'react-native-modal';
-
-import { LinearGradientButton } from 'components';
 import { Color } from 'global-styles';
+
+import { LinearGradientButton } from '.';
 
 interface BottomSheetModalProps {
   isVisible: boolean;

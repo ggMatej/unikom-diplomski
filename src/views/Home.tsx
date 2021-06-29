@@ -3,17 +3,13 @@ import { StatusBar, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import LinearGradient from 'react-native-linear-gradient';
 import { PERMISSIONS, check, openSettings } from 'react-native-permissions';
-
 import { Color } from 'global-styles';
-import { ActionButton, InfoModal } from 'components';
-import { BottomSheetModal } from 'components/BottomSheetModal';
 import { usePermissionRequest } from 'hooks';
+import { ActionButton, BottomSheetModal, InfoModal } from 'modules/shared';
 
 export const Home: React.FC = () => {
-  const [
-    isCameraPermissionModalVisible,
-    setIsCameraPermissionModalVisible,
-  ] = useState(false);
+  const [isCameraPermissionModalVisible, setIsCameraPermissionModalVisible] =
+    useState(false);
 
   const [
     isLocationPermissionModalVisible,
@@ -22,9 +18,8 @@ export const Home: React.FC = () => {
 
   const [isSettingsModalVisible, setIsSettingsModalVisible] = useState(false);
 
-  const [isImageUploadModalVisible, setIsImageUploadModalVisible] = useState(
-    false,
-  );
+  const [isImageUploadModalVisible, setIsImageUploadModalVisible] =
+    useState(false);
 
   function toggleCameraPermissionModal() {
     setIsCameraPermissionModalVisible(!isCameraPermissionModalVisible);
