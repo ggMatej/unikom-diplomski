@@ -1,23 +1,23 @@
+import { Color } from 'global-styles';
+
 export const slides = [
   {
-    color: '#F2A1AD',
-    title: 'Dessert Recipes',
-    description:
-      'Hot or cold, our dessert recipes can turn an average meal into a memorable event',
+    color: Color.Primary,
+    title: 'Dodajte fotografiju',
+    description: 'uslikajte ili dodajte fotografiju onečišćenog okoliša',
     picture: require('../../../assets/images/camera.png'),
   },
   {
-    color: '#0090D6',
-    title: 'Healthy Foods',
+    color: Color.Secondary,
+    title: 'Dodajte opis',
     description:
-      'Discover healthy recipes that are easy to do with detailed cooking instructions from top chefs',
-    picture: require('../../../assets/images/camera.png'),
+      'napišite opis i korisne informacije koje mogu pomoći pri intervenciji',
+    picture: require('../../../assets/images/description.png'),
   },
   {
-    color: '#69C743',
-    title: 'Easy Meal Ideas',
-    description:
-      'explore recipes by food type, preparation method, cuisine, country and more',
-    picture: require('../../../assets/images/camera.png'),
+    color: Color.Primary,
+    title: 'Dodajte lokaciju',
+    description: 'dodajte lokaciju onečišćenog područja',
+    picture: require('../../../assets/images/location.png'),
   },
 ];

@@ -12,13 +12,12 @@ import Animated, {
 } from 'react-native-reanimated';
 import Svg, { Path } from 'react-native-svg';
 import { Vector } from 'react-native-redash';
+import { ReactElement } from 'react';
+import MaskedView from '@react-native-masked-view/masked-view';
 
 export const { width: WIDTH, height: HEIGHT } = Dimensions.get('screen');
 export const MIN_LEDGE = 25;
 export const MARGIN_WIDTH = MIN_LEDGE + 50;
-
-// 0.5522847498 is taken from https://spencermortensen.com/articles/bezier-circle/
-const C = 0.5522847498;
 
 const AnimatedPath = Animated.createAnimatedComponent(Path);
 
@@ -37,11 +36,20 @@ export enum Side {
   NONE,
 }
 
+interface SlideProps {
+  slide: {
+    color: string;
+    title: string;
+    description: string;
+    picture: ReturnType<typeof require>;
+  };
+}
+
 interface WaveProps {
   side: Side;
-  children: ReactNode;
-  isTransitioning: Animated.SharedValue<boolean>;
   position: Vector<Animated.SharedValue<number>>;
+  children: ReactElement<SlideProps>;
+  isTransitioning: Animated.SharedValue<boolean>;
 }
 
 type Props = WaveProps;
@@ -55,10 +63,9 @@ export const Wave: React.FC<Props> = ({
   const R = useDerivedValue(() => {
     return Math.min(x.value - MIN_LEDGE, WIDTH / 2);
   });
-
   const ledge = useDerivedValue(() => {
     const minLedge = interpolate(
-      x.value,
+      x.value / 2,
       [0, MIN_LEDGE],
       [0, MIN_LEDGE],
       Extrapolate.CLAMP,
@@ -66,14 +73,44 @@ export const Wave: React.FC<Props> = ({
     const baseLedge = minLedge + Math.max(0, x.value - MIN_LEDGE - R.value);
     return withSpring(isTransitioning.value ? x.value : baseLedge);
   });
-
   const animatedProps = useAnimatedProps(() => {
-    const d = ['M 0 0', `H ${x.value}`, `V ${HEIGHT}`, 'H 0', 'Z'];
+    const stepY = x.value - MIN_LEDGE; // R = 50
+    const stepX = R.value / 2; // R/2
+    // 0.5522847498 is taken from https://spencermortensen.com/articles/bezier-circle/
+    const C = stepY * 0.5522847498;
+
+    const p1 = { x: ledge.value, y: y.value - 2 * stepY };
+    const p2 = vec2(p1.x + stepX, p1.y + stepY);
+    const p3 = vec2(p2.x + stepX, p2.y + stepY);
+    const p4 = vec2(p3.x - stepX, p3.y + stepY);
+    const p5 = vec2(p4.x - stepX, p4.y + stepY);
+
+    const c11 = vec2(p1.x, p1.y + C);
+    const c12 = vec2(p2.x, p2.y);
+
+    const c21 = vec2(p2.x, p2.y);
+    const c22 = vec2(p3.x, p3.y - C);
+
+    const c31 = vec2(p3.x, p3.y + C);
+    const c32 = vec2(p4.x, p4.y);
+
+    const c41 = vec2(p4.x, p4.y);
+    const c42 = vec2(p5.x, p5.y - C);
+
     return {
-      d: d.join(' '),
+      d: [
+        'M 0 0',
+        `H ${p1.x}`,
+        `V ${p1.y}`,
+        curve(c11, c12, p2),
+        curve(c21, c22, p3),
+        curve(c31, c32, p4),
+        curve(c41, c42, p5),
+        `V ${HEIGHT}`,
+        'H 0',
+      ].join(' '),
     };
   });
-
   const maskElement = (
     <Svg
       style={[
@@ -89,16 +126,17 @@ export const Wave: React.FC<Props> = ({
       />
     </Svg>
   );
-
   const androidStyle = useAnimatedStyle(() => {
     return {
       transform: [
         {
-          translateX: isTransitioning.value
-            ? withTiming(0)
-            : side === Side.RIGHT
-            ? WIDTH - ledge.value
-            : -WIDTH + ledge.value,
+          translateX:
+            // eslint-disable-next-line no-nested-ternary
+            isTransitioning.value
+              ? withTiming(10)
+              : side === Side.RIGHT
+              ? WIDTH - ledge.value
+              : -WIDTH + ledge.value,
         },
       ],
     };

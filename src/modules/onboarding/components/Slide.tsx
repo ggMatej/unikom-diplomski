@@ -2,6 +2,7 @@ import Color from 'color';
 import React from 'react';
 import { View, Text, StyleSheet, Dimensions, Image } from 'react-native';
 import Svg, { RadialGradient, Defs, Rect, Stop } from 'react-native-svg';
+import { Color as AppColors } from 'global-styles';
 
 const { width, height } = Dimensions.get('screen');
 const SIZE = width - 75;
@@ -19,7 +20,7 @@ type Props = SlideProps;
 export const Slide: React.FC<Props> = ({
   slide: { picture, color, title, description },
 }) => {
-  const lighterColor = Color(color).lighten(0.8).toString();
+  const lighterColor = Color(color).lighten(0.3).toString();
   return (
     <>
       <Svg style={StyleSheet.absoluteFill}>
@@ -55,15 +56,13 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 48,
-    color: 'white',
+    color: AppColors.TextWhite,
     textAlign: 'center',
     marginBottom: 16,
-    fontFamily: 'SFProDisplay-Bold',
   },
   description: {
     fontSize: 18,
-    color: 'white',
+    color: AppColors.TextWhite,
     textAlign: 'center',
-    fontFamily: 'SFProDisplay-Regular',
   },
 });

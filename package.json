@@ -13,8 +13,8 @@
     "preset": "adb shell pm reset-permissions com.unikom.zelenko"
   },
   "dependencies": {
-    "@react-native-community/masked-view": "^0.1.10",
     "@react-native-firebase/app": "^10.7.0",
+    "@react-native-masked-view/masked-view": "^0.2.5",
     "@react-navigation/material-top-tabs": "^5.2.16",
     "@react-navigation/native": "^5.5.0",
     "@react-navigation/stack": "^5.4.1",
