@@ -133,7 +133,7 @@ export const Wave: React.FC<Props> = ({
           translateX:
             // eslint-disable-next-line no-nested-ternary
             isTransitioning.value
-              ? withTiming(10)
+              ? withTiming(0)
               : side === Side.RIGHT
               ? WIDTH - ledge.value
               : -WIDTH + ledge.value,

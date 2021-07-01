@@ -41,12 +41,12 @@ export const OnboardingButton: React.FC<Props> = ({
       {isLeft ? (
         <Image
           style={styles.image}
-          source={require('assets/images/arrow-left.png')}
+          source={require('assets/images/arrow-right.png')}
         />
       ) : (
         <Image
           style={styles.image}
-          source={require('assets/images/arrow-right.png')}
+          source={require('assets/images/arrow-left.png')}
         />
       )}
     </Animated.View>

@@ -134,7 +134,10 @@ export const Slider: React.FC<Props> = ({
       <Animated.View style={StyleSheet.absoluteFill}>
         {current}
         {prev && (
-          <Animated.View style={[StyleSheet.absoluteFill, leftStyle]}>
+          <Animated.View
+            pointerEvents="none"
+            style={[StyleSheet.absoluteFill, leftStyle]}
+          >
             <Wave
               position={left}
               side={Side.LEFT}
@@ -150,7 +153,7 @@ export const Slider: React.FC<Props> = ({
           </Animated.View>
         )}
         {next && (
-          <Animated.View style={StyleSheet.absoluteFill}>
+          <Animated.View pointerEvents="none" style={StyleSheet.absoluteFill}>
             <Wave
               position={right}
               side={Side.RIGHT}

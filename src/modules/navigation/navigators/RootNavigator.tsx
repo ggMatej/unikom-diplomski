@@ -22,7 +22,7 @@ export const RootNavigator: React.FC = () => {
         <Stack.Screen name="splash" component={views.Splash} />
         <Stack.Screen
           options={{
-            ...TransitionPresets.SlideFromRightIOS,
+            ...TransitionPresets.ScaleFromCenterAndroid,
           }}
           name="onboarding"
           component={views.OnboardingScreen}
