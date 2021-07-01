@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dimensions } from 'react-native';
+import { Dimensions, Image, StyleSheet } from 'react-native';
 import Animated, {
   useAnimatedStyle,
   withTiming,
@@ -34,6 +34,28 @@ export const OnboardingButton: React.FC<Props> = ({
     justifyContent: 'center',
     alignItems: 'center',
     opacity: withTiming(activeSide.value === Side.NONE ? 1 : 0),
+    marginLeft: isLeft ? -RADIUS / 2 : RADIUS / 2,
   }));
-  return <Animated.View style={style}></Animated.View>;
+  return (
+    <Animated.View style={style}>
+      {isLeft ? (
+        <Image
+          style={styles.image}
+          source={require('assets/images/arrow-left.png')}
+        />
+      ) : (
+        <Image
+          style={styles.image}
+          source={require('assets/images/arrow-right.png')}
+        />
+      )}
+    </Animated.View>
+  );
 };
+
+const styles = StyleSheet.create({
+  image: {
+    height: 25,
+    width: 40,
+  },
+});

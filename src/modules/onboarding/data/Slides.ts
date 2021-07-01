@@ -10,8 +10,7 @@ export const slides = [
   {
     color: Color.Secondary,
     title: 'Dodajte opis',
-    description:
-      'napišite opis i korisne informacije koje mogu pomoći pri intervenciji',
+    description: 'napišite opis i korisne informacije',
     picture: require('../../../assets/images/description.png'),
   },
   {
