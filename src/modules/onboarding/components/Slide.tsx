@@ -78,7 +78,9 @@ export const Slide: React.FC<Props> = ({
       }, 5000);
     }
 
-    setRotationValue();
+    setTimeout(() => {
+      setRotationValue();
+    }, 5000);
   }, [opacity, rotation]);
 
   return (
@@ -146,12 +148,15 @@ const styles = StyleSheet.create({
     color: AppColors.TextWhite,
     textAlign: 'center',
     marginBottom: 16,
+    fontFamily: 'Lato-Bold',
+    fontWeight: 'bold',
   },
   description: {
-    fontSize: 18,
+    fontSize: 19,
     color: AppColors.TextWhite,
     textAlign: 'center',
     marginBottom: 80,
+    fontFamily: 'Lato-Regular',
   },
   skipButtonContainer: {
     alignSelf: 'flex-end',
@@ -165,6 +170,7 @@ const styles = StyleSheet.create({
   skipButtonText: {
     color: AppColors.TextWhite,
     fontSize: 16,
+    fontFamily: 'Lato-Bold',
   },
   skipButtonImage: {
     height: 20,
