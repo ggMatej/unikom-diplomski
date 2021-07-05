@@ -1,7 +1,6 @@
 import React from 'react';
 import { TouchableOpacity, Image, StyleSheet, Text, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-
 import { Color } from 'global-styles';
 
 interface OwnProps {
@@ -19,19 +18,19 @@ export const ActionButton: React.FC<Props> = ({
   buttonText,
   isDisabled,
 }) => {
-  function getIcon() {
-    switch (buttonIcon) {
-      case 'camera': {
-        return require('../assets/images/camera.png');
-      }
-      case 'gallery': {
-        return require('../assets/images/text.png');
-      }
-      case 'location': {
-        return require('../assets/images/location.png');
-      }
-    }
-  }
+  // function getIcon() {
+  //   switch (buttonIcon) {
+  //     case 'camera': {
+  //       return require('../../../assets/images/camera.png');
+  //     }
+  //     case 'gallery': {
+  //       return require('../../../assets/images/text.png');
+  //     }
+  //     case 'location': {
+  //       return require('../../../assets/images/location.png');
+  //     }
+  //   }
+  // }
   return (
     <View style={[styles.container, isDisabled ? styles.disabled : null]}>
       <LinearGradient
@@ -45,7 +44,7 @@ export const ActionButton: React.FC<Props> = ({
           onPress={onPress}
           style={styles.touchableOpacity}
         >
-          <Image style={styles.icon} source={getIcon()} />
+          {/* <Image style={styles.icon} source={getIcon()} /> */}
         </TouchableOpacity>
       </LinearGradient>
       <Text style={styles.text}>{buttonText}</Text>

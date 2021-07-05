@@ -1,13 +1,12 @@
 import React, { useEffect } from 'react';
 import SplashScreen from 'react-native-splash-screen';
-
 import { NavigationProps } from 'modules/navigation';
 
 type Props = NavigationProps<'splash'>;
 
 export const Splash: React.FC<Props> = ({ navigation }) => {
   // Ovo ce bit spremljeno u redux, za sada ovo da imam lakše za testing
-  const finishedOnboarding = true;
+  const finishedOnboarding = false;
 
   function onMount() {
     if (finishedOnboarding) {

@@ -1,85 +1,33 @@
-import React from 'react';
-import { Image, StatusBar, StyleSheet } from 'react-native';
-import Onboarding from 'react-native-onboarding-swiper';
-
+import React, { useState } from 'react';
+import { Slide, Slider, slides } from 'modules/onboarding';
 import { NavigationProps } from 'modules/navigation';
-import { Color } from 'global-styles';
+
+export const assets = slides.map(({ picture }) => picture);
 
 type Props = NavigationProps<'onboarding'>;
 
-export const OnboardingScreen: React.FC<Props> = ({ navigation }) => {
-  function handleOnSkip() {
-    navigation.replace('main');
-  }
-
-  function handleOnDone() {
-    navigation.replace('main');
-  }
-
+export const OnboardingScreen: React.FC<Props> = ({ navigation, route }) => {
+  const [index, setIndex] = useState(0);
+  const prev = slides[index - 1];
+  const next = slides[index + 1];
   return (
-    <>
-      <StatusBar backgroundColor={Color.Background} />
-      <Onboarding
-        pages={[
-          {
-            backgroundColor: Color.Background,
-            title: 'Uslikaj',
-            subtitle: 'Uslikajte ili odaberite postojeću fotografiju',
-            image: (
-              <Image
-                style={styles.image}
-                source={require('assets/images/onboarding-camera.png')}
-              />
-            ),
-          },
-          {
-            backgroundColor: Color.Background,
-            title: 'Opiši',
-            subtitle: 'Napišite detaljan opis situacije',
-            image: (
-              <Image
-                style={styles.image}
-                source={require('assets/images/onboarding-description.png')}
-              />
-            ),
-          },
-          {
-            backgroundColor: Color.Background,
-            title: 'Pošalji',
-            subtitle: 'Pošaljite prijavu na razmatranje',
-            image: (
-              <Image
-                style={styles.image}
-                source={require('assets/images/onboarding-upload.png')}
-              />
-            ),
-          },
-        ]}
-        nextLabel="Dalje"
-        skipLabel="Preskoči"
-        bottomBarHighlight={false}
-        bottomBarHeight={70}
-        onSkip={handleOnSkip}
-        onDone={handleOnDone}
-        titleStyles={styles.title}
-        subTitleStyles={styles.subtitle}
+    <Slider
+      key={index}
+      index={index}
+      setIndex={setIndex}
+      prev={
+        prev && <Slide route={route} navigation={navigation} slide={prev} />
+      }
+      next={
+        next && <Slide route={route} navigation={navigation} slide={next} />
+      }
+    >
+      <Slide
+        route={route}
+        navigation={navigation}
+        slide={slides[index]!}
+        index={index}
       />
-    </>
+    </Slider>
   );
 };
-
-const styles = StyleSheet.create({
-  image: {
-    tintColor: Color.Primary,
-  },
-  title: {
-    color: Color.Primary,
-    fontWeight: 'bold',
-  },
-  subtitle: {
-    color: Color.Primary,
-  },
-  onboarding: {
-    color: Color.Primary,
-  },
-});

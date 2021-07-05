@@ -4,8 +4,8 @@ import {
   TransitionPresets,
 } from '@react-navigation/stack';
 import React from 'react';
-
 import * as views from 'views';
+
 import { NavigationParamList } from 'modules/navigation/models';
 
 import { MainNavigator } from './MainNavigator';
@@ -22,7 +22,7 @@ export const RootNavigator: React.FC = () => {
         <Stack.Screen name="splash" component={views.Splash} />
         <Stack.Screen
           options={{
-            ...TransitionPresets.SlideFromRightIOS,
+            ...TransitionPresets.ScaleFromCenterAndroid,
           }}
           name="onboarding"
           component={views.OnboardingScreen}

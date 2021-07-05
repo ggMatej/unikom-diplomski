@@ -1,19 +1,15 @@
 import React, { useState } from 'react';
-import { StatusBar, StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import LinearGradient from 'react-native-linear-gradient';
 import { PERMISSIONS, check, openSettings } from 'react-native-permissions';
-
 import { Color } from 'global-styles';
-import { ActionButton, InfoModal } from 'components';
-import { BottomSheetModal } from 'components/BottomSheetModal';
 import { usePermissionRequest } from 'hooks';
+import { BottomSheetModal, InfoModal } from 'modules/shared';
 
 export const Home: React.FC = () => {
-  const [
-    isCameraPermissionModalVisible,
-    setIsCameraPermissionModalVisible,
-  ] = useState(false);
+  const [isCameraPermissionModalVisible, setIsCameraPermissionModalVisible] =
+    useState(false);
 
   const [
     isLocationPermissionModalVisible,
@@ -22,9 +18,8 @@ export const Home: React.FC = () => {
 
   const [isSettingsModalVisible, setIsSettingsModalVisible] = useState(false);
 
-  const [isImageUploadModalVisible, setIsImageUploadModalVisible] = useState(
-    false,
-  );
+  const [isImageUploadModalVisible, setIsImageUploadModalVisible] =
+    useState(false);
 
   function toggleCameraPermissionModal() {
     setIsCameraPermissionModalVisible(!isCameraPermissionModalVisible);
@@ -97,7 +92,6 @@ export const Home: React.FC = () => {
 
   return (
     <SafeAreaView>
-      <StatusBar backgroundColor={Color.Text} />
       <View style={styles.mainContainer}>
         <BottomSheetModal
           isVisible={isImageUploadModalVisible}
@@ -138,26 +132,7 @@ export const Home: React.FC = () => {
           style={styles.topContainerBack}
         >
           <View style={styles.topContainerFront}>
-            <View style={styles.contentContainer}>
-              <ActionButton
-                buttonText={'dodaj fotografiju'}
-                onPress={onAddPhoto}
-                buttonIcon={'camera'}
-                isDisabled={isImageUploadModalVisible}
-              />
-              <ActionButton
-                buttonText={'dodaj opis'}
-                onPress={onPress}
-                buttonIcon={'gallery'}
-                isDisabled={true}
-              />
-              <ActionButton
-                buttonText={'dodaj lokaciju'}
-                onPress={onPress}
-                buttonIcon={'location'}
-                isDisabled={true}
-              />
-            </View>
+            <View style={styles.contentContainer}></View>
           </View>
         </LinearGradient>
         <View style={styles.bottomContainerBack}>
@@ -166,7 +141,11 @@ export const Home: React.FC = () => {
             useAngle={true}
             angle={90}
             style={styles.bottomContainerFront}
-          />
+          >
+            <View style={styles.tabContainer}>
+              <Text>TAB CONTAINER</Text>
+            </View>
+          </LinearGradient>
         </View>
       </View>
     </SafeAreaView>
@@ -174,6 +153,11 @@ export const Home: React.FC = () => {
 };
 
 const styles = StyleSheet.create({
+  tabContainer: {
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   mainContainer: {
     height: '100%',
     backgroundColor: Color.Secondary,
@@ -191,11 +175,9 @@ const styles = StyleSheet.create({
   },
   bottomContainerBack: {
     flex: 1,
-    backgroundColor: Color.Background,
   },
   bottomContainerFront: {
     height: '100%',
-    backgroundColor: Color.Primary,
   },
   contentContainer: {
     height: '95%',

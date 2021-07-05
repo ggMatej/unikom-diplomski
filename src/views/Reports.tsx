@@ -2,7 +2,6 @@ import React from 'react';
 import { StatusBar, View, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import LinearGradient from 'react-native-linear-gradient';
-
 import { Color } from 'global-styles';
 
 export const Reports: React.FC = ({}) => {
@@ -38,7 +37,7 @@ const styles = StyleSheet.create({
   },
   topContainerBack: {
     flex: 1,
-   // backgroundColor: Color.Primary,
+    // backgroundColor: Color.Primary,
   },
   topContainerFront: {
     height: '100%',
