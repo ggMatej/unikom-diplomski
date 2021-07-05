@@ -22,7 +22,7 @@ export const BottomSheetModal: React.FC<Props> = ({
 }) => {
   return (
     <Modal
-      backdropColor={Color.Text}
+      backdropColor={Color.TextDark}
       backdropOpacity={0.55}
       isVisible={isVisible}
       onSwipeComplete={onCancel}
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
     backgroundColor: Color.Background,
     borderTopWidth: 0.3,
-    borderTopColor: Color.Text,
+    borderTopColor: Color.TextDark,
     borderTopLeftRadius: 35,
     borderTopRightRadius: 35,
     borderLeftColor: Color.Primary,
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
     height: '80%',
   },
   modalHandle: {
-    backgroundColor: Color.Text,
+    backgroundColor: Color.TextDark,
     opacity: 0.3,
     height: 5,
     width: '20%',

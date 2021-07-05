@@ -4,8 +4,8 @@ import {
   TransitionPresets,
 } from '@react-navigation/stack';
 import React from 'react';
-
 import * as views from 'views';
+
 import { NavigationParamList } from 'modules/navigation/models';
 
 import { MainNavigator } from './MainNavigator';

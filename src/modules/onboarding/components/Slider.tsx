@@ -1,7 +1,5 @@
-import { Color } from 'global-styles';
-import React, { ReactElement } from 'react';
-import { useEffect } from 'react';
-import { StatusBar, StyleSheet, View } from 'react-native';
+import React, { ReactElement, useEffect } from 'react';
+import { StyleSheet } from 'react-native';
 import { PanGestureHandler } from 'react-native-gesture-handler';
 import Animated, {
   runOnJS,

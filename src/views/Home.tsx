@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { StatusBar, StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import LinearGradient from 'react-native-linear-gradient';
 import { PERMISSIONS, check, openSettings } from 'react-native-permissions';
 import { Color } from 'global-styles';
 import { usePermissionRequest } from 'hooks';
-import { ActionButton, BottomSheetModal, InfoModal } from 'modules/shared';
+import { BottomSheetModal, InfoModal } from 'modules/shared';
 
 export const Home: React.FC = () => {
   const [isCameraPermissionModalVisible, setIsCameraPermissionModalVisible] =
@@ -92,7 +92,6 @@ export const Home: React.FC = () => {
 
   return (
     <SafeAreaView>
-      <StatusBar backgroundColor={Color.Text} />
       <View style={styles.mainContainer}>
         <BottomSheetModal
           isVisible={isImageUploadModalVisible}

@@ -1,6 +1,5 @@
-import React, { ReactNode } from 'react';
-import { Dimensions, StatusBar, StyleSheet, View } from 'react-native';
-import { Color } from 'global-styles';
+import React, { ReactElement } from 'react';
+import { Dimensions, StyleSheet, View } from 'react-native';
 import Animated, {
   Extrapolate,
   interpolate,
@@ -12,8 +11,6 @@ import Animated, {
 } from 'react-native-reanimated';
 import Svg, { Path } from 'react-native-svg';
 import { Vector } from 'react-native-redash';
-import { ReactElement } from 'react';
-import MaskedView from '@react-native-masked-view/masked-view';
 
 export const { width: WIDTH, height: HEIGHT } = Dimensions.get('screen');
 export const MIN_LEDGE = 25;

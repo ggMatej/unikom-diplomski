@@ -1,5 +1,5 @@
 import Color from 'color';
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   View,
   Text,
@@ -11,9 +11,6 @@ import {
 } from 'react-native';
 import Svg, { RadialGradient, Defs, Rect, Stop } from 'react-native-svg';
 import { Color as AppColors } from 'global-styles';
-
-import { NavigationProps } from 'modules/navigation';
-import { useState } from 'react';
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
@@ -21,7 +18,8 @@ import Animated, {
   withSequence,
   withTiming,
 } from 'react-native-reanimated';
-import { useEffect } from 'react';
+
+import { NavigationProps } from 'modules/navigation';
 
 const { width, height } = Dimensions.get('screen');
 const SIZE = width - 75;

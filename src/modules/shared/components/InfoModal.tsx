@@ -20,7 +20,7 @@ export const InfoModal: React.FC<Props> = ({
 }) => {
   return (
     <Modal
-      backdropColor={Color.Text}
+      backdropColor={Color.TextDark}
       backdropOpacity={0.5}
       isVisible={isVisible}
       onSwipeComplete={infoModalCallback}
