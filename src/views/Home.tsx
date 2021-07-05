@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, ScrollView, Dimensions } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import LinearGradient from 'react-native-linear-gradient';
 import { PERMISSIONS, check, openSettings } from 'react-native-permissions';
 import { Color } from 'global-styles';
 import { usePermissionRequest } from 'hooks';
 import { BottomSheetModal, InfoModal } from 'modules/shared';
+
+const { width } = Dimensions.get('screen');
 
 export const Home: React.FC = () => {
   const [isCameraPermissionModalVisible, setIsCameraPermissionModalVisible] =
@@ -132,7 +134,25 @@ export const Home: React.FC = () => {
           style={styles.topContainerBack}
         >
           <View style={styles.topContainerFront}>
-            <View style={styles.contentContainer}></View>
+            <View style={styles.contentContainer}>
+              <View style={styles.scrollViewContainer}>
+                <ScrollView
+                  showsHorizontalScrollIndicator={false}
+                  pagingEnabled
+                  horizontal
+                >
+                  <View style={styles.scrollViewItemContainer}>
+                    <Text>PRVI VIEW</Text>
+                  </View>
+                  <View style={styles.scrollViewItemContainer}>
+                    <Text>DRUGI VIEW</Text>
+                  </View>
+                  <View style={styles.scrollViewItemContainer}>
+                    <Text>TRECI VIEW</Text>
+                  </View>
+                </ScrollView>
+              </View>
+            </View>
           </View>
         </LinearGradient>
         <View style={styles.bottomContainerBack}>
@@ -142,9 +162,7 @@ export const Home: React.FC = () => {
             angle={90}
             style={styles.bottomContainerFront}
           >
-            <View style={styles.tabContainer}>
-              <Text>TAB CONTAINER</Text>
-            </View>
+            <View style={styles.tabContainer}></View>
           </LinearGradient>
         </View>
       </View>
@@ -185,6 +203,15 @@ const styles = StyleSheet.create({
     elevation: 3,
     borderBottomRightRadius: 55,
     justifyContent: 'space-around',
+    alignItems: 'center',
+  },
+  scrollViewContainer: {
+    width: '95%',
+    height: '95%',
+  },
+  scrollViewItemContainer: {
+    width: width - 0.1 * width,
+    justifyContent: 'center',
     alignItems: 'center',
   },
 });
