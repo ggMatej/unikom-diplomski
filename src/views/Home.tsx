@@ -1,11 +1,18 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, ScrollView, Dimensions } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Image,
+  ScrollView,
+  Dimensions,
+  TouchableOpacity,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import LinearGradient from 'react-native-linear-gradient';
 import { PERMISSIONS, check, openSettings } from 'react-native-permissions';
 import { Color } from 'global-styles';
 import { usePermissionRequest } from 'hooks';
-import { BottomSheetModal, InfoModal } from 'modules/shared';
+import { ActionButton, BottomSheetModal, InfoModal } from 'modules/shared';
 
 const { width } = Dimensions.get('screen');
 
@@ -137,18 +144,30 @@ export const Home: React.FC = () => {
             <View style={styles.contentContainer}>
               <View style={styles.scrollViewContainer}>
                 <ScrollView
-                  showsHorizontalScrollIndicator={false}
                   pagingEnabled
+                  showsHorizontalScrollIndicator={false}
                   horizontal
                 >
                   <View style={styles.scrollViewItemContainer}>
-                    <Text>PRVI VIEW</Text>
+                    <ActionButton
+                      buttonText={'Dodaj fotografiju'}
+                      buttonIcon={'camera'}
+                      onPress={onAddPhoto}
+                    />
                   </View>
                   <View style={styles.scrollViewItemContainer}>
-                    <Text>DRUGI VIEW</Text>
+                    <ActionButton
+                      buttonText={'Dodaj opis'}
+                      buttonIcon={'gallery'}
+                      onPress={onAddPhoto}
+                    />
                   </View>
                   <View style={styles.scrollViewItemContainer}>
-                    <Text>TRECI VIEW</Text>
+                    <ActionButton
+                      buttonText={'Dodaj lokaciju'}
+                      buttonIcon={'location'}
+                      onPress={onAddPhoto}
+                    />
                   </View>
                 </ScrollView>
               </View>
@@ -213,5 +232,7 @@ const styles = StyleSheet.create({
     width: width - 0.1 * width,
     justifyContent: 'center',
     alignItems: 'center',
+    flexDirection: 'row',
+    padding: 20,
   },
 });
