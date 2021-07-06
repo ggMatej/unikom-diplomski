@@ -11,6 +11,7 @@ export const TopTabNavigator: React.FC = () => {
   return (
     <Tab.Navigator
       backBehavior="none"
+      swipeEnabled={false}
       tabBarOptions={{
         style: {
           backgroundColor: Color.Background,
