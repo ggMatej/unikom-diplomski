@@ -12,9 +12,9 @@ import LinearGradient from 'react-native-linear-gradient';
 import { PERMISSIONS, check, openSettings } from 'react-native-permissions';
 import { Color } from 'global-styles';
 import { usePermissionRequest } from 'hooks';
-import { ActionButton, BottomSheetModal, InfoModal } from 'modules/shared';
+import { Action, BottomSheetModal, InfoModal } from 'modules/shared';
 
-const { width } = Dimensions.get('screen');
+const { width } = Dimensions.get('window');
 
 export const Home: React.FC = () => {
   const [isCameraPermissionModalVisible, setIsCameraPermissionModalVisible] =
@@ -142,35 +142,45 @@ export const Home: React.FC = () => {
         >
           <View style={styles.topContainerFront}>
             <View style={styles.contentContainer}>
-              <View style={styles.scrollViewContainer}>
-                <ScrollView
-                  pagingEnabled
-                  showsHorizontalScrollIndicator={false}
-                  horizontal
-                >
-                  <View style={styles.scrollViewItemContainer}>
-                    <ActionButton
-                      buttonText={'Dodaj fotografiju'}
-                      buttonIcon={'camera'}
-                      onPress={onAddPhoto}
-                    />
-                  </View>
-                  <View style={styles.scrollViewItemContainer}>
-                    <ActionButton
-                      buttonText={'Dodaj opis'}
-                      buttonIcon={'gallery'}
-                      onPress={onAddPhoto}
-                    />
-                  </View>
-                  <View style={styles.scrollViewItemContainer}>
-                    <ActionButton
-                      buttonText={'Dodaj lokaciju'}
-                      buttonIcon={'location'}
-                      onPress={onAddPhoto}
-                    />
-                  </View>
-                </ScrollView>
-              </View>
+              <TouchableOpacity onPress={onPress} style={styles.navigator}>
+                <Image
+                  style={styles.navigatorIcon}
+                  source={require('assets/images/arrow-left.png')}
+                />
+              </TouchableOpacity>
+              <ScrollView
+                pagingEnabled
+                showsHorizontalScrollIndicator={false}
+                horizontal
+              >
+                <View style={styles.scrollViewItemContainer}>
+                  <Action
+                    buttonText={'Dodaj fotografiju'}
+                    buttonIcon={'camera'}
+                    onPress={onAddPhoto}
+                  />
+                </View>
+                <View style={styles.scrollViewItemContainer}>
+                  <Action
+                    buttonText={'Dodaj opis'}
+                    buttonIcon={'description'}
+                    onPress={onAddPhoto}
+                  />
+                </View>
+                <View style={styles.scrollViewItemContainer}>
+                  <Action
+                    buttonText={'Dodaj lokaciju'}
+                    buttonIcon={'location'}
+                    onPress={onAddPhoto}
+                  />
+                </View>
+              </ScrollView>
+              <TouchableOpacity onPress={onPress} style={styles.navigator}>
+                <Image
+                  style={styles.navigatorIcon}
+                  source={require('assets/images/arrow-right.png')}
+                />
+              </TouchableOpacity>
             </View>
           </View>
         </LinearGradient>
@@ -217,22 +227,28 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   contentContainer: {
+    flexDirection: 'row',
+    padding: 5,
     height: '95%',
     width: '95%',
     elevation: 3,
     borderBottomRightRadius: 55,
-    justifyContent: 'space-around',
-    alignItems: 'center',
-  },
-  scrollViewContainer: {
-    width: '95%',
-    height: '95%',
   },
   scrollViewItemContainer: {
-    width: width - 0.1 * width,
+    width: width - 110,
     justifyContent: 'center',
     alignItems: 'center',
-    flexDirection: 'row',
-    padding: 20,
+  },
+  navigator: {
+    alignSelf: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 40,
+    height: 40,
+  },
+  navigatorIcon: {
+    width: 25,
+    height: 25,
+    tintColor: Color.TextDark,
   },
 });

@@ -2,16 +2,16 @@ import React from 'react';
 import { TouchableOpacity, Image, StyleSheet, Text, View } from 'react-native';
 import { Color } from 'global-styles';
 
-interface OwnProps {
+interface ActionProps {
   onPress: () => void;
-  buttonIcon: 'camera' | 'gallery' | 'location';
+  buttonIcon: 'camera' | 'description' | 'location';
   buttonText: string;
   isDisabled?: boolean;
 }
 
-type Props = OwnProps;
+type Props = ActionProps;
 
-export const ActionButton: React.FC<Props> = ({
+export const Action: React.FC<Props> = ({
   onPress,
   buttonIcon,
   buttonText,
@@ -22,7 +22,7 @@ export const ActionButton: React.FC<Props> = ({
       case 'camera': {
         return require('../../../assets/images/add-camera.png');
       }
-      case 'gallery': {
+      case 'description': {
         return require('../../../assets/images/add-description.png');
       }
       case 'location': {
@@ -46,24 +46,24 @@ export const ActionButton: React.FC<Props> = ({
 
 const styles = StyleSheet.create({
   container: {
-    width: '70%',
-    height: '50%',
+    width: '100%',
+    height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
   },
   touchableOpacity: {
-    width: '100%',
-    height: '100%',
+    width: 200,
+    height: 200,
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: 2,
     borderColor: Color.TextDark,
     borderStyle: 'dashed',
-    borderRadius: 55,
+    borderRadius: 100,
   },
   icon: {
-    width: '100%',
-    height: '100%',
+    width: 200,
+    height: 200,
   },
   text: {
     color: Color.TextDark,
