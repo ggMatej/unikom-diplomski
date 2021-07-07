@@ -37,9 +37,11 @@ export const Action: React.FC<Props> = ({
         onPress={onPress}
         style={styles.touchableOpacity}
       >
-        <Image style={styles.icon} source={getIcon()} />
+        <View style={styles.imageContainer}>
+          <Image style={styles.icon} source={getIcon()} />
+        </View>
+        <Text style={styles.text}>{buttonText}</Text>
       </TouchableOpacity>
-      <Text style={styles.text}>{buttonText}</Text>
     </View>
   );
 };
@@ -52,10 +54,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   touchableOpacity: {
-    width: 200,
-    height: 200,
+    width: 250,
+    height: 250,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  imageContainer: {
     borderWidth: 2,
     borderColor: Color.TextDark,
     borderStyle: 'dashed',
