@@ -1,12 +1,33 @@
 import React from 'react';
-import { TouchableOpacity, Image, StyleSheet, Text, View } from 'react-native';
+import {
+  TouchableOpacity,
+  Image,
+  StyleSheet,
+  Text,
+  View,
+  Dimensions,
+} from 'react-native';
 import { Color } from 'global-styles';
+import Animated, {
+  Extrapolate,
+  interpolate,
+  useAnimatedScrollHandler,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated';
+
+const { width } = Dimensions.get('window');
+
+const WIDTH = width - 110;
 
 interface ActionProps {
   onPress: () => void;
   buttonIcon: 'camera' | 'description' | 'location';
   buttonText: string;
   isDisabled?: boolean;
+  translateX: Animated.SharedValue<number>;
+  index: number;
 }
 
 type Props = ActionProps;
@@ -16,7 +37,30 @@ export const Action: React.FC<Props> = ({
   buttonIcon,
   buttonText,
   isDisabled,
+  translateX,
+  index,
 }) => {
+  const actionViewContainerStyle = useAnimatedStyle(() => {
+    const scale = interpolate(
+      translateX.value,
+      [(index - 1) * WIDTH, index * WIDTH, (index + 1) * WIDTH],
+      [0, 1, 0],
+      Extrapolate.CLAMP,
+    );
+
+    const opacity = interpolate(
+      translateX.value,
+      [(index - 1) * WIDTH, index * WIDTH, (index + 1) * WIDTH],
+      [0, 1, 0],
+      Extrapolate.CLAMP,
+    );
+
+    return {
+      opacity: opacity,
+      transform: [{ scale }],
+    };
+  }, []);
+
   function getIcon() {
     switch (buttonIcon) {
       case 'camera': {
@@ -30,8 +74,9 @@ export const Action: React.FC<Props> = ({
       }
     }
   }
+
   return (
-    <View style={styles.container}>
+    <Animated.View style={[styles.container, actionViewContainerStyle]}>
       <TouchableOpacity
         disabled={isDisabled ? isDisabled : false}
         onPress={onPress}
@@ -42,7 +87,7 @@ export const Action: React.FC<Props> = ({
         </View>
         <Text style={styles.text}>{buttonText}</Text>
       </TouchableOpacity>
-    </View>
+    </Animated.View>
   );
 };
 

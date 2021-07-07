@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import {
   StyleSheet,
   View,
@@ -8,9 +8,10 @@ import {
   NativeScrollEvent,
 } from 'react-native';
 import Animated, {
+  interpolate,
+  useAnimatedScrollHandler,
   useAnimatedStyle,
   useSharedValue,
-  withTiming,
 } from 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import LinearGradient from 'react-native-linear-gradient';
@@ -18,6 +19,7 @@ import { PERMISSIONS, check, openSettings } from 'react-native-permissions';
 import { Color } from 'global-styles';
 import { usePermissionRequest } from 'hooks';
 import { Action, BottomSheetModal, InfoModal } from 'modules/shared';
+import { act } from 'react-test-renderer';
 
 const { width } = Dimensions.get('window');
 
@@ -27,6 +29,12 @@ const THIRD_ACTION_POSITION = (width - 110) * 2;
 
 export const Home: React.FC = () => {
   const scrollViewRef = useRef<Animated.ScrollView | null>(null);
+
+  const translateXValue = useSharedValue(0);
+
+  const scrollHandler = useAnimatedScrollHandler((event) => {
+    translateXValue.value = event.contentOffset.x;
+  });
 
   const [isCameraPermissionModalVisible, setIsCameraPermissionModalVisible] =
     useState(false);
@@ -43,25 +51,43 @@ export const Home: React.FC = () => {
   const [isImageUploadModalVisible, setIsImageUploadModalVisible] =
     useState(false);
 
-  const leftNavigatorOpacity = useSharedValue(1);
-  const leftNavigatorScale = useSharedValue(1);
-
   const leftNavigatorButtonAnimatedStyle = useAnimatedStyle(() => {
-    return {
-      opacity: leftNavigatorOpacity.value,
-      transform: [{ scale: leftNavigatorScale.value }],
-    };
-  }, [actionIndex]);
+    const scale = interpolate(
+      translateXValue.value,
+      [FIRST_ACTION_POSITION, SECOND_ACTION_POSITION, THIRD_ACTION_POSITION],
+      [0.5, 1, 1],
+    );
 
-  const rightNavigatorOpacity = useSharedValue(1);
-  const rightNavigatorScale = useSharedValue(1);
+    const opacity = interpolate(
+      translateXValue.value,
+      [FIRST_ACTION_POSITION, SECOND_ACTION_POSITION, THIRD_ACTION_POSITION],
+      [0.5, 1, 1],
+    );
+
+    return {
+      opacity: opacity,
+      transform: [{ scale: scale }],
+    };
+  }, []);
 
   const rightNavigatorButtonAnimatedStyle = useAnimatedStyle(() => {
+    const scale = interpolate(
+      translateXValue.value,
+      [FIRST_ACTION_POSITION, SECOND_ACTION_POSITION, THIRD_ACTION_POSITION],
+      [1, 1, 0.5],
+    );
+
+    const opacity = interpolate(
+      translateXValue.value,
+      [FIRST_ACTION_POSITION, SECOND_ACTION_POSITION, THIRD_ACTION_POSITION],
+      [1, 1, 0.5],
+    );
+
     return {
-      opacity: rightNavigatorOpacity.value,
-      transform: [{ scale: rightNavigatorScale.value }],
+      opacity: opacity,
+      transform: [{ scale: scale }],
     };
-  }, [actionIndex]);
+  }, []);
 
   function onActionScrollEnd(event: NativeScrollEvent) {
     const index = Math.round(event.contentOffset.x / (width - 110));
@@ -190,46 +216,6 @@ export const Home: React.FC = () => {
     return;
   }
 
-  useEffect(() => {
-    if (actionIndex === 0) {
-      leftNavigatorOpacity.value = withTiming(0.5, {
-        duration: 85,
-      });
-      leftNavigatorScale.value = withTiming(0.5, {
-        duration: 85,
-      });
-      return;
-    }
-
-    if (actionIndex === 2) {
-      rightNavigatorOpacity.value = withTiming(0.5, {
-        duration: 85,
-      });
-      rightNavigatorScale.value = withTiming(0.5, {
-        duration: 85,
-      });
-      return;
-    }
-    leftNavigatorOpacity.value = withTiming(1, {
-      duration: 85,
-    });
-    leftNavigatorScale.value = withTiming(1, {
-      duration: 85,
-    });
-    rightNavigatorOpacity.value = withTiming(1, {
-      duration: 85,
-    });
-    rightNavigatorScale.value = withTiming(1, {
-      duration: 85,
-    });
-  }, [
-    actionIndex,
-    leftNavigatorOpacity,
-    leftNavigatorScale,
-    rightNavigatorOpacity,
-    rightNavigatorScale,
-  ]);
-
   return (
     <SafeAreaView>
       <View style={styles.mainContainer}>
@@ -272,7 +258,7 @@ export const Home: React.FC = () => {
           style={styles.topContainerBack}
         >
           <View style={styles.topContainerFront}>
-            <Animated.View style={styles.contentContainer}>
+            <View style={styles.contentContainer}>
               <Animated.View
                 style={[styles.navigator, leftNavigatorButtonAnimatedStyle]}
               >
@@ -287,6 +273,7 @@ export const Home: React.FC = () => {
                 </TouchableOpacity>
               </Animated.View>
               <Animated.ScrollView
+                onScroll={scrollHandler}
                 ref={scrollViewRef}
                 pagingEnabled
                 showsHorizontalScrollIndicator={false}
@@ -295,8 +282,10 @@ export const Home: React.FC = () => {
                   onActionScrollEnd(event.nativeEvent);
                 }}
               >
-                <View style={styles.scrollViewItemContainer}>
+                <View style={[styles.scrollViewItemContainer]}>
                   <Action
+                    index={0}
+                    translateX={translateXValue}
                     buttonText={'Dodaj fotografiju'}
                     buttonIcon={'camera'}
                     onPress={onAddPhoto}
@@ -304,6 +293,8 @@ export const Home: React.FC = () => {
                 </View>
                 <View style={styles.scrollViewItemContainer}>
                   <Action
+                    index={1}
+                    translateX={translateXValue}
                     buttonText={'Dodaj opis'}
                     buttonIcon={'description'}
                     onPress={onAddPhoto}
@@ -311,6 +302,8 @@ export const Home: React.FC = () => {
                 </View>
                 <View style={styles.scrollViewItemContainer}>
                   <Action
+                    index={2}
+                    translateX={translateXValue}
                     buttonText={'Dodaj lokaciju'}
                     buttonIcon={'location'}
                     onPress={onAddPhoto}
@@ -330,7 +323,7 @@ export const Home: React.FC = () => {
                   />
                 </TouchableOpacity>
               </Animated.View>
-            </Animated.View>
+            </View>
           </View>
         </LinearGradient>
         <View style={styles.bottomContainerBack}>
