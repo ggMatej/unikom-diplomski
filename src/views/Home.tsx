@@ -8,10 +8,12 @@ import {
   NativeScrollEvent,
 } from 'react-native';
 import Animated, {
+  Extrapolate,
   interpolate,
   useAnimatedScrollHandler,
   useAnimatedStyle,
   useSharedValue,
+  withSpring,
 } from 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import LinearGradient from 'react-native-linear-gradient';
@@ -33,7 +35,7 @@ export const Home: React.FC = () => {
   const translateXValue = useSharedValue(0);
 
   const scrollHandler = useAnimatedScrollHandler((event) => {
-    translateXValue.value = event.contentOffset.x;
+    translateXValue.value = withSpring(event.contentOffset.x);
   });
 
   const [isCameraPermissionModalVisible, setIsCameraPermissionModalVisible] =
@@ -56,12 +58,14 @@ export const Home: React.FC = () => {
       translateXValue.value,
       [FIRST_ACTION_POSITION, SECOND_ACTION_POSITION, THIRD_ACTION_POSITION],
       [0.5, 1, 1],
+      Extrapolate.CLAMP,
     );
 
     const opacity = interpolate(
       translateXValue.value,
       [FIRST_ACTION_POSITION, SECOND_ACTION_POSITION, THIRD_ACTION_POSITION],
       [0.5, 1, 1],
+      Extrapolate.CLAMP,
     );
 
     return {
