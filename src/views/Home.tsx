@@ -21,7 +21,6 @@ import { PERMISSIONS, check, openSettings } from 'react-native-permissions';
 import { Color } from 'global-styles';
 import { usePermissionRequest } from 'hooks';
 import { Action, BottomSheetModal, InfoModal } from 'modules/shared';
-import { act } from 'react-test-renderer';
 
 const { width } = Dimensions.get('window');
 

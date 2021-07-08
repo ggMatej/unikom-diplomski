@@ -11,10 +11,7 @@ import { Color } from 'global-styles';
 import Animated, {
   Extrapolate,
   interpolate,
-  useAnimatedScrollHandler,
   useAnimatedStyle,
-  useSharedValue,
-  withTiming,
 } from 'react-native-reanimated';
 
 const { width } = Dimensions.get('window');
