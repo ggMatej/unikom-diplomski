@@ -14,6 +14,7 @@ import Animated, {
   useAnimatedStyle,
   useSharedValue,
   withSpring,
+  withTiming,
 } from 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import LinearGradient from 'react-native-linear-gradient';
@@ -33,9 +34,15 @@ export const Home: React.FC = () => {
   const scrollViewRef = useRef<Animated.ScrollView | null>(null);
 
   const translateXValue = useSharedValue(0);
+  const translateIconYValue = useSharedValue(0);
+  const translateDotXValue = useSharedValue(0);
 
   const scrollHandler = useAnimatedScrollHandler((event) => {
     translateXValue.value = withSpring(event.contentOffset.x);
+    translateIconYValue.value = event.contentOffset.x;
+    translateDotXValue.value = withSpring(event.contentOffset.x, {
+      stiffness: 150,
+    });
   });
 
   const [isCameraPermissionModalVisible, setIsCameraPermissionModalVisible] =
@@ -220,6 +227,41 @@ export const Home: React.FC = () => {
     return;
   }
 
+  function onTabIconPress(index: 0 | 1 | 2) {
+    switch (index) {
+      case 0:
+        {
+          scrollViewRef?.current?.scrollTo({
+            x: FIRST_ACTION_POSITION,
+            y: 0,
+            animated: true,
+          });
+          setActionIndex(0);
+        }
+        break;
+      case 1:
+        {
+          scrollViewRef?.current?.scrollTo({
+            x: SECOND_ACTION_POSITION,
+            y: 0,
+            animated: true,
+          });
+          setActionIndex(1);
+        }
+        break;
+      case 2:
+        {
+          scrollViewRef?.current?.scrollTo({
+            x: THIRD_ACTION_POSITION,
+            y: 0,
+            animated: true,
+          });
+          setActionIndex(2);
+        }
+        break;
+    }
+  }
+
   return (
     <SafeAreaView>
       <View style={styles.mainContainer}>
@@ -337,7 +379,11 @@ export const Home: React.FC = () => {
             angle={90}
             style={styles.bottomContainerFront}
           >
-            <Tab />
+            <Tab
+              onPress={onTabIconPress}
+              translateDotX={translateDotXValue}
+              translateIconY={translateIconYValue}
+            />
           </LinearGradient>
         </View>
       </View>
