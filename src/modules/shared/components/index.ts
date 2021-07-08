@@ -4,3 +4,7 @@ export * from './Action';
 export * from './BottomSheetModal';
 export * from './LinearGradientButton';
 export * from './InfoModal';
+export * from './CameraTabIcon';
+export * from './DescriptionTabIcon';
+export * from './LocationTabIcon';
+export * from './Tab';

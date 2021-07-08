@@ -21,6 +21,7 @@ import { PERMISSIONS, check, openSettings } from 'react-native-permissions';
 import { Color } from 'global-styles';
 import { usePermissionRequest } from 'hooks';
 import { Action, BottomSheetModal, InfoModal } from 'modules/shared';
+import { Tab } from 'modules/shared/components/Tab';
 
 const { width } = Dimensions.get('window');
 
@@ -336,7 +337,7 @@ export const Home: React.FC = () => {
             angle={90}
             style={styles.bottomContainerFront}
           >
-            <View style={styles.tabContainer}></View>
+            <Tab />
           </LinearGradient>
         </View>
       </View>
@@ -345,11 +346,6 @@ export const Home: React.FC = () => {
 };
 
 const styles = StyleSheet.create({
-  tabContainer: {
-    height: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   mainContainer: {
     height: '100%',
     backgroundColor: Color.Secondary,
