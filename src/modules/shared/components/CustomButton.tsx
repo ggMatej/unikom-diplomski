@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 16,
     textTransform: 'uppercase',
-    fontFamily: 'Lato-Regular',
+    fontFamily: 'Lato-Bold',
   },
   cancel: {
     borderBottomColor: Color.Error,
