@@ -14,7 +14,6 @@ import Animated, {
   useAnimatedStyle,
   useSharedValue,
   withSpring,
-  withTiming,
 } from 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import LinearGradient from 'react-native-linear-gradient';
@@ -38,10 +37,16 @@ export const Home: React.FC = () => {
   const translateDotXValue = useSharedValue(0);
 
   const scrollHandler = useAnimatedScrollHandler((event) => {
-    translateXValue.value = withSpring(event.contentOffset.x);
+    translateXValue.value = withSpring(event.contentOffset.x, {
+      mass: 0.5,
+      damping: 20,
+      stiffness: 50,
+    });
     translateIconYValue.value = event.contentOffset.x;
     translateDotXValue.value = withSpring(event.contentOffset.x, {
-      stiffness: 150,
+      mass: 0.3,
+      damping: 20,
+      stiffness: 100,
     });
   });
 

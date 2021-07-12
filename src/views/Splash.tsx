@@ -6,7 +6,7 @@ type Props = NavigationProps<'splash'>;
 
 export const Splash: React.FC<Props> = ({ navigation }) => {
   // Ovo ce bit spremljeno u redux, za sada ovo da imam lakše za testing
-  const finishedOnboarding = false;
+  const finishedOnboarding = true;
 
   function onMount() {
     if (finishedOnboarding) {

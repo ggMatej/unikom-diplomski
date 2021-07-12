@@ -11,7 +11,6 @@ import {
   DescriptionTabIcon,
   LocationTabIcon,
 } from 'modules/shared';
-import { useEffect } from 'react';
 
 const { width } = Dimensions.get('window');
 
@@ -80,8 +79,21 @@ export const Tab: React.FC<Props> = ({
       ],
     );
 
+    const width = interpolate(
+      translateDotX.value,
+      [
+        FIRST_ACTION_POSITION,
+        FIRST_ACTION_POSITION + SECOND_ACTION_POSITION / 2,
+        SECOND_ACTION_POSITION,
+        SECOND_ACTION_POSITION + SECOND_ACTION_POSITION / 2,
+        THIRD_ACTION_POSITION,
+      ],
+      [10, 45, 10, 45, 10],
+    );
+
     return {
       transform: [{ translateX: translate }],
+      width: width,
     };
   }, []);
 
