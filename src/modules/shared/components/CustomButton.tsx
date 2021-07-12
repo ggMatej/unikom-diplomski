@@ -5,7 +5,7 @@ import Animated from 'react-native-reanimated';
 
 interface LinearGradientButtonProps {
   placeholder: string;
-  onPress: () => void;
+  onPress?: () => void;
   type: 'cancel' | 'primary';
 }
 
