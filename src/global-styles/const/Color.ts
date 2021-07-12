@@ -5,5 +5,6 @@ export enum Color {
   TextWhite = '#F9F7F4',
   TextDark = '#212124',
   Error = '#ab3c3c',
+  Success = '#39FF14',
   Warning = '#ff9b00',
 }

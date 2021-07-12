@@ -23,6 +23,7 @@ interface TabProps {
   onPress: (index: 0 | 1 | 2) => void;
   translateIconY: Animated.SharedValue<number>;
   translateDotX: Animated.SharedValue<number>;
+  actionIndex: number;
 }
 
 type Props = TabProps;
@@ -31,6 +32,7 @@ export const Tab: React.FC<Props> = ({
   translateDotX,
   translateIconY,
   onPress,
+  actionIndex,
 }) => {
   const cameraStyle = useAnimatedStyle(() => {
     const translateY = interpolate(
@@ -106,7 +108,7 @@ export const Tab: React.FC<Props> = ({
               onPress(0);
             }}
           >
-            <CameraTabIcon />
+            <CameraTabIcon actionIndex={actionIndex} isStepCompleted={false} />
           </TouchableOpacity>
         </Animated.View>
         <Animated.View style={[descriptionStyle]}>
@@ -115,7 +117,10 @@ export const Tab: React.FC<Props> = ({
               onPress(1);
             }}
           >
-            <DescriptionTabIcon />
+            <DescriptionTabIcon
+              actionIndex={actionIndex}
+              isStepCompleted={false}
+            />
           </TouchableOpacity>
         </Animated.View>
         <Animated.View style={[locationStyle]}>
@@ -124,7 +129,10 @@ export const Tab: React.FC<Props> = ({
               onPress(2);
             }}
           >
-            <LocationTabIcon />
+            <LocationTabIcon
+              actionIndex={actionIndex}
+              isStepCompleted={false}
+            />
           </TouchableOpacity>
         </Animated.View>
       </View>

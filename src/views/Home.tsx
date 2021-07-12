@@ -388,6 +388,7 @@ export const Home: React.FC = () => {
               onPress={onTabIconPress}
               translateDotX={translateDotXValue}
               translateIconY={translateIconYValue}
+              actionIndex={actionIndex}
             />
           </LinearGradient>
         </View>
