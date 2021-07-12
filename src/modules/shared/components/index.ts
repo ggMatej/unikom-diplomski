@@ -2,7 +2,7 @@ export * from './HeaderInfoIcon';
 export * from './HeaderLogo';
 export * from './Action';
 export * from './BottomSheetModal';
-export * from './LinearGradientButton';
+export * from './CustomButton';
 export * from './InfoModal';
 export * from './CameraTabIcon';
 export * from './DescriptionTabIcon';

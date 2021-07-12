@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import Modal from 'react-native-modal';
 import { Color } from 'global-styles';
 
-import { LinearGradientButton } from '.';
+import { CustomButton } from './CustomButton';
 
 interface BottomSheetModalProps {
   isVisible: boolean;
@@ -32,20 +32,20 @@ export const BottomSheetModal: React.FC<Props> = ({
       useNativeDriverForBackdrop={true}
       onBackdropPress={onCancel}
     >
-      <View style={styles.imageUploadModalContainer}>
+      <View style={styles.container}>
         <View style={styles.modalHandle} />
         <View style={styles.imageUploadModalContent}>
-          <LinearGradientButton
+          <CustomButton
             placeholder={'otvori kameru'}
             onPress={onOpenCamera}
             type={'primary'}
           />
-          <LinearGradientButton
+          <CustomButton
             placeholder={'izaberi iz galerije'}
             onPress={onOpenGallery}
             type={'primary'}
           />
-          <LinearGradientButton
+          <CustomButton
             placeholder={'odustani'}
             onPress={onCancel}
             type={'cancel'}
@@ -59,12 +59,14 @@ export const BottomSheetModal: React.FC<Props> = ({
 const styles = StyleSheet.create({
   view: {
     justifyContent: 'flex-end',
+    alignItems: 'center',
     margin: 0,
   },
-  imageUploadModalContainer: {
+  container: {
     flexDirection: 'column',
     justifyContent: 'space-between',
-    height: '40%',
+    height: '35%',
+    width: '90%',
     alignItems: 'center',
     paddingTop: 20,
     paddingBottom: 20,
@@ -79,10 +81,10 @@ const styles = StyleSheet.create({
     borderLeftWidth: 4,
   },
   imageUploadModalContent: {
-    justifyContent: 'center',
+    justifyContent: 'space-evenly',
     backgroundColor: Color.Background,
-    width: '70%',
-    height: '80%',
+    width: '90%',
+    height: '85%',
   },
   modalHandle: {
     backgroundColor: Color.TextDark,
